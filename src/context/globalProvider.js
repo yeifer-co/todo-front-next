@@ -14,6 +14,7 @@ export const GlobalProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [modal, setModal] = useState(false);
 
+    const [selectedTask, setSelectedTask] = useState(null);
     const [tasks, setTasks] = useState([]);
 
     const theme = themes[selectedTheme];
@@ -24,6 +25,7 @@ export const GlobalProvider = ({ children }) => {
     
     const closeModal = () => {
         setModal(false);
+        setSelectedTask(null);
     };
 
     const allTasks = async () => {
@@ -59,6 +61,15 @@ export const GlobalProvider = ({ children }) => {
         }
     };
 
+    const getTask = async (id) => {
+        return tasks.find((task) => task.id === id);
+    }
+
+    const editTask = async (id) => {
+        setSelectedTask(await getTask(id));
+        openModal();
+    }
+
     const updateTask = async (task) => {
         try {
             // body all task data except id
@@ -91,6 +102,8 @@ export const GlobalProvider = ({ children }) => {
                 tasks,
                 allTasks,
                 deleteTask,
+                editTask,
+                selectedTask,
                 isLoading,
                 completedTasks,
                 incompleteTasks,

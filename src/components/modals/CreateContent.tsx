@@ -5,7 +5,7 @@ import styled from "styled-components";
 import Button from "../button/Button";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { add, plus } from "../../utils/Icons";
+import { add, check } from "../../utils/Icons";
 
 function CreateContent() {
     const [name, setName] = useState("");
@@ -13,7 +13,7 @@ function CreateContent() {
     const [author, setAuthor] = useState("");
     const [completed, setCompleted] = useState(false);
 
-    const { theme, allTasks, closeModal } = useGlobalState();
+    const { theme, allTasks, closeModal, selectedTask } = useGlobalState();
 
     const handleChange = (name: string) => (e: any) => {
         switch (name) {
@@ -50,7 +50,13 @@ function CreateContent() {
         }
     
         try {
-            const res = await axios.post("/api/task", task);
+            //const res = await axios.post("/api/task", task);
+            let res;
+            if (selectedTask) {
+                res = await axios.put(`/api/task/${selectedTask.id}`, task);
+            } else {
+                res = await axios.post("/api/task", task);
+            }
         
             if (res.data.success) {
                 toast.success(res.data.message);
@@ -66,11 +72,20 @@ function CreateContent() {
         } 
     };
 
+    React.useEffect(() => {
+        if (selectedTask) {
+          setName(selectedTask.name);
+          setDescription(selectedTask.description);
+          setAuthor(selectedTask.author);
+          setCompleted(selectedTask.isComplete);
+        }
+    }, [selectedTask]);
+
     return (
         <CreateContentStyled onSubmit={handleSubmit} theme={theme}>
             <h1>Create a Task</h1>
             <div className="input-control">
-                <label htmlFor="name">Name</label>
+                <label htmlFor="control-name">Name</label>
                 <input
                     type="text"
                     id="control-name"
@@ -81,7 +96,7 @@ function CreateContent() {
                 />
             </div>
             <div className="input-control">
-                <label htmlFor="description">Description</label>
+                <label htmlFor="control-description">Description</label>
                 <textarea
                     value={description}
                     onChange={handleChange("description")}
@@ -92,7 +107,7 @@ function CreateContent() {
                 ></textarea>
             </div>
             <div className="input-control">
-                <label htmlFor="author">Author</label>
+                <label htmlFor="control-author">Author</label>
                 <input
                     value={author}
                     onChange={handleChange("author")}
@@ -102,21 +117,21 @@ function CreateContent() {
                 />
             </div>
             <div className="input-control toggler">
-                <label htmlFor="completed">Toggle Completed</label>
+                <label htmlFor="control-completed">Toggle Completed</label>
                 <input
-                    value={completed.toString()}
+                    checked={completed}
                     onChange={handleChange("completed")}
                     type="checkbox"
                     name="completed"
-                    id="completed"
+                    id="control-completed"
                 />
             </div>
 
             <div className="submit-btn flex justify-end">
                 <Button
                     type="submit"
-                    name="Create Task"
-                    icon={add}
+                    name={selectedTask ? "Update" : "Create"}
+                    icon={selectedTask ? check : add}
                     padding={"0.8rem 2rem"}
                     borderRad={"0.8rem"}
                     fw={"500"}

@@ -15,7 +15,7 @@ interface Props {
 
 function TaskItem({ id, name, description, author, completed }: Props) {
 
-    const { theme, deleteTask, updateTask } = useGlobalState();
+    const { theme, deleteTask, updateTask, editTask } = useGlobalState();
 
     return (
         <TaskItemStyled theme={theme}>
@@ -51,7 +51,10 @@ function TaskItem({ id, name, description, author, completed }: Props) {
                         Pending
                     </button>
                 )}
-                <button className="edit">{edit}</button>
+                <button
+                    className="edit"
+                    onClick={() => editTask(id)}
+                >{edit}</button>
                 <button
                     className="delete"
                     onClick={() => deleteTask(id)}
