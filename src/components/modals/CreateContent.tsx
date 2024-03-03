@@ -40,9 +40,7 @@ function CreateContent() {
         };
     
         try {
-            const res = await axios.post("http://localhost:4000/task", task);
-
-            console.log("CreateTask -> res", res);
+            const res = await axios.post("/api/task", task);
         
             if (res.data.success) {
                 toast.success(res.data.message);

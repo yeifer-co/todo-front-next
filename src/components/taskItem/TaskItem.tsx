@@ -3,6 +3,7 @@ import React from "react";
 import { edit, trash } from "../../utils/Icons";
 import styled from "styled-components";
 import { useGlobalState } from "../../context/globalProvider";
+import CreateContent from "../modals/CreateContent";
 
 interface Props {
     id: string;
@@ -14,7 +15,7 @@ interface Props {
 
 function TaskItem({ id, name, description, author, completed }: Props) {
 
-    const { theme } = useGlobalState();
+    const { theme, deleteTask } = useGlobalState();
 
     return (
         <TaskItemStyled theme={theme}>
@@ -28,7 +29,10 @@ function TaskItem({ id, name, description, author, completed }: Props) {
                     <button className="incomplete">Pending</button>
                 )}
                 <button className="edit">{edit}</button>
-                <button className="delete">{trash}</button>
+                <button
+                    className="delete"
+                    onClick={() => deleteTask(id)}
+                >{trash}</button>
             </div>
         </TaskItemStyled>
     );
