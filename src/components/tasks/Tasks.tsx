@@ -13,8 +13,6 @@ interface Props {
 
 function Tasks({ title, tasks }: Props) {
 
-    console.log("Task: ", tasks);
-
     const { theme, isLoading } = useGlobalState();
 
     return (

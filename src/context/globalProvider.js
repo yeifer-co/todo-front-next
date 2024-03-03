@@ -23,9 +23,13 @@ export const GlobalProvider = ({ children }) => {
         try {
             const res = await axios.get("/api/task");
 
-            console.log(res.data);
+            const sorted = res.data.data.sort((a, b) => {
+                return (
+                    a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
+                );
+            });
             
-            setTasks(res.data.data);
+            setTasks(sorted);
             setIsLoading(false);
         } catch (error) {
             console.log(error || "Something went wrong");
