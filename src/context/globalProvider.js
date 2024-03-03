@@ -34,7 +34,7 @@ export const GlobalProvider = ({ children }) => {
 
             const sorted = res.data.data.sort((a, b) => {
                 return (
-                    a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
+                  new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
                 );
             });
             
