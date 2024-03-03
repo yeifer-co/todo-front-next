@@ -36,7 +36,11 @@ function Sidebar() {
                     const link = item.link;
 
                     return (
-                        <li key={index} className={`nav-item ${pathname === link ? "active" : ""}`} onClick={() => handleClick(link)}>
+                        <li
+                            key={index}
+                            className={`nav-item ${pathname === link ? "active" : ""}`}
+                            onClick={() => handleClick(link)}
+                        >
                             {item.icon}
                             <Link href={link}>
                                 {item.title}
