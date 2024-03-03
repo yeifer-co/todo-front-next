@@ -15,26 +15,33 @@ function Tasks({ title, tasks }: Props) {
 
     console.log("Task: ", tasks);
 
-    const { theme } = useGlobalState();
+    const { theme, isLoading } = useGlobalState();
 
     return (
         <TasksStyled theme={theme}>
+            <CreateContent/>
             <h1>{title}</h1>
-            <div className="tasks grid">
-                {tasks.map((task) => (
-                    <TaskItem key={task.id}
-                        id={task.id}
-                        name={task.name}
-                        description={task.description}
-                        author={task.author}
-                        completed={task.isComplete} 
-                    />
-                ))}
-                <button className="create-task">
-                    {plus}
-                    Add New Task
-                </button>
-            </div>
+            {!isLoading ? (
+                <div className="tasks grid">
+                    {tasks.map((task) => (
+                        <TaskItem key={task.id}
+                            id={task.id}
+                            name={task.name}
+                            description={task.description}
+                            author={task.author}
+                            completed={task.isComplete} 
+                        />
+                    ))}
+                    <button className="create-task">
+                        {plus}
+                        Add New Task
+                    </button>
+                </div>
+            ) : (
+                <div className="w-full h-full flex items-center justify-center">
+                    <span className="loader"></span>
+                </div>
+            )}
         </TasksStyled>
     );
 }

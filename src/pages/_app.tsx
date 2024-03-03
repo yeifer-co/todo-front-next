@@ -8,6 +8,7 @@ import store from '../app/store'
 import Sidebar from '../components/sidebar/Sidebar'
 import GlobalStyleProvider from '../providers/GlobalStyleProvider'
 import ContextProvider from '../providers/ContextProvider'
+import NextTopLoader from 'nextjs-toploader'
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -22,6 +23,11 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           referrerPolicy="no-referrer"
         />
       </Head>
+      <NextTopLoader
+        height={2}
+        color="#27AE60"
+        easing="cubic-bezier(.5, .2, 0, 1)"
+      />
       <ContextProvider>
         <GlobalStyleProvider>
           <Sidebar/>
