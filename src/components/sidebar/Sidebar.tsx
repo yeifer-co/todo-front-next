@@ -45,7 +45,6 @@ function Sidebar() {
                     );
                 })}
             </ul>
-            <button></button>
         </SidebarStyled>;
 }
 
@@ -58,7 +57,6 @@ const SidebarStyled = styled.nav`
 
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 
     color: ${(props) => props.theme.colorGrey3};
 
@@ -138,6 +136,13 @@ const SidebarStyled = styled.nav`
                 transform: scale(1.1);
             }
         }
+    }
+
+    .nav-items {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        justify-content: center;
     }
 
     .nav-item {
