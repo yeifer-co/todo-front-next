@@ -23,11 +23,11 @@ function Sidebar() {
             <div className="profile">
                 <div className="profile-overlay"></div>
                 <div className="image">
-                    <Image width={70} height={70} src="/avatar.jpeg" alt="Profile" />
+                    <Image width={70} height={70} src="/avatar.png" alt="Profile" />
                 </div>
                 <h1>
-                    <span>Hi, I'm</span>
-                    <span>John Doe</span>
+                    <span>Autority</span>
+                    <span>Challenge</span>
                 </h1>
             </div>
             <ul className="nav-items">
@@ -61,8 +61,8 @@ const SidebarStyled = styled.nav`
     color: ${(props) => props.theme.colorGrey3};
 
     .profile {
-        margin: 1.5rem;
-        padding: 1rem 0.8rem;
+        margin: 0.8rem;
+        padding: 1rem 3rem 1rem 0.5rem;
         position: relative;
 
         border-radius: 1rem;
@@ -121,7 +121,7 @@ const SidebarStyled = styled.nav`
         }
 
         > h1 {
-            margin-left: 0.8rem;
+            margin-left: 0.5rem;
             font-size: clamp(1.2rem, 4vw, 1.4rem);
             line-height: 100%;
         }
