@@ -24,9 +24,8 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <ContextProvider>
         <GlobalStyleProvider>
-          <Sidebar></Sidebar>
+          <Sidebar/>
           <Component {...pageProps} />
-          content
         </GlobalStyleProvider>
       </ContextProvider>
     </Provider>
