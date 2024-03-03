@@ -2,9 +2,10 @@
 import React from "react";
 import styled from "styled-components";
 import { useGlobalState } from "../../context/globalProvider";
-import CreateContent from "../modals/CreateContent";
 import TaskItem from "../taskItem/TaskItem";
 import { plus } from "../../utils/Icons";
+import CreateContent from "../modals/CreateContent";
+import Modal from "../modals/Modal";
 
 interface Props {
     title: string;
@@ -13,11 +14,11 @@ interface Props {
 
 function Tasks({ title, tasks }: Props) {
 
-    const { theme, isLoading } = useGlobalState();
+    const { theme, isLoading, openModal, modal } = useGlobalState();
 
     return (
         <TasksStyled theme={theme}>
-            <CreateContent/>
+            {modal && <Modal content={<CreateContent />} />}
             <h1>{title}</h1>
             {!isLoading ? (
                 <div className="tasks grid">
@@ -30,7 +31,7 @@ function Tasks({ title, tasks }: Props) {
                             completed={task.isComplete} 
                         />
                     ))}
-                    <button className="create-task">
+                    <button className="create-task" onClick={openModal}>
                         {plus}
                         Add New Task
                     </button>
