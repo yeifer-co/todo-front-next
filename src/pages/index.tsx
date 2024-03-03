@@ -1,10 +1,11 @@
+"use client"
+import React from "react";
 import type { NextPage } from 'next'
-import Head from 'next/head'
-
-import styles from '../styles/Home.module.css'
 
 const IndexPage: NextPage = () => {
-  return <main></main>
+  return (
+      <main>Index</main>
+  );
 }
 
 export default IndexPage
