@@ -43,6 +43,11 @@ function CreateContent() {
             author,
             isComplete: completed,
         };
+
+        if (name === "") {
+            toast.error("Name is required.");
+            return;
+        }
     
         try {
             const res = await axios.post("/api/task", task);
