@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { NextApiHandler } from 'next';
 
-const targetApiUrl = 'http://localhost:4000/task';
+console.log('>>>>>>>>>>>>> ENV', process.env);
+
+const targetApiUrl = `${process.env.API_ENDPOINT}/task`;
 
 const taskHandler: NextApiHandler = async (req, res) => {
     const { method, body, query: { id } } = req;
